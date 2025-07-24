@@ -71,10 +71,12 @@ Visit: http://localhost:5173
 ## 🌐 Live Demo
 (You can deploy using Netlify, Vercel, or any hosting provider that supports environment variables)
 
-##🤝 Contributing
+
+## 🤝 Contributing
 Contributions are welcome! Fork the repo, make your changes, and submit a pull request.
 
-##📄 License
+
+## 📄 License
 
 Let me know if you'd like me to generate this as a downloadable `.md` file or turn this into a deploy-ready GitHub repo!
 
