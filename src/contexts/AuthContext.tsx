@@ -34,12 +34,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     setLoading(true);
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        fetchUserProfile(session.user.id).finally(() => setLoading(false));
-      } else {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+
+      if (event === 'SIGNED_IN' && session) {
+        fetchUserProfile(session.user).finally(() => setLoading(false));
+      } else if (event === 'SIGNED_OUT') {
+        setUserProfile(null);
+        setLoading(false);
+      } else if (event === 'INITIAL_SESSION' && session) {
+        fetchUserProfile(session.user).finally(() => setLoading(false));
+      } else if (!session) {
         setLoading(false);
       }
     });
@@ -49,29 +56,64 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  const fetchUserProfile = async (userId: string) => {
+  const createProfile = async (currentUser: User) => {
+    try {
+      const username = currentUser.user_metadata?.username || `user-${currentUser.id.slice(0, 8)}`;
+      const email = currentUser.email;
+
+      if (!email) {
+        toast.error('Could not initialize your profile: email is missing.');
+        console.error('Error creating profile: email is null for user ' + currentUser.id);
+        setUserProfile(null);
+        return;
+      }
+
+      const { data: newProfile, error } = await supabase
+        .from('profiles')
+        .insert({ id: currentUser.id, username, email })
+        .select()
+        .single();
+  
+      if (error) {
+        toast.error('Could not initialize your profile.');
+        console.error('Error creating profile:', error);
+        setUserProfile(null);
+      } else {
+        setUserProfile(newProfile);
+        toast.success('Your profile has been set up!');
+      }
+    } catch (error) {
+      console.error('Create profile exception:', error);
+      setUserProfile(null);
+    }
+  };
+
+  const fetchUserProfile = async (currentUser: User) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', userId)
+        .eq('id', currentUser.id)
         .single()
 
-      if (error && error.code !== 'PGRST116') {
+      if (error && error.code === 'PGRST116') {
+        console.warn('Profile not found, creating one...');
+        await createProfile(currentUser);
+      } else if (error) {
         console.error('Error fetching profile:', error)
-        setUserProfile({})
+        setUserProfile(null)
       } else {
-        setUserProfile(data || {})
+        setUserProfile(data)
       }
     } catch (error) {
       console.error('Profile fetch error:', error)
-      setUserProfile({})
+      setUserProfile(null)
     }
   }
 
   const refreshProfile = async () => {
     if (user) {
-      await fetchUserProfile(user.id)
+      await fetchUserProfile(user)
     }
   }
 

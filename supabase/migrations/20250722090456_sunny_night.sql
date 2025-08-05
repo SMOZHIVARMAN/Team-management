@@ -27,15 +27,39 @@ CREATE TABLE profiles (
   created_at timestamptz DEFAULT now()
 );
 
+-- Backfill profiles for existing users who might not have one
+INSERT INTO public.profiles (id, username)
+SELECT
+    id,
+    COALESCE(raw_user_meta_data->>'username', 'user-' || left(id::text, 8))
+FROM
+    auth.users
+WHERE
+    id NOT IN (SELECT id FROM public.profiles)
+ON CONFLICT (id) DO NOTHING;
+
 -- Function to create a new profile for a new user
 CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS $
+DECLARE
+  generated_username TEXT;
 BEGIN
+  -- Attempt to use the username from metadata, otherwise generate one.
+  generated_username := COALESCE(
+    new.raw_user_meta_data->>'username',
+    'user-' || left(new.id::text, 8)
+  );
+
+  -- If the chosen username already exists, append a random suffix until it's unique.
+  WHILE EXISTS (SELECT 1 FROM public.profiles WHERE username = generated_username) LOOP
+    generated_username := generated_username || '-' || substr(md5(random()::text), 1, 4);
+  END LOOP;
+
   INSERT INTO public.profiles (id, username)
-  VALUES (new.id, new.raw_user_meta_data->>'username');
+  VALUES (new.id, generated_username);
   RETURN new;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- Trigger to call handle_new_user on new user creation
 CREATE TRIGGER on_auth_user_created
@@ -46,15 +70,17 @@ CREATE TRIGGER on_auth_user_created
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
 -- RLS Policies for profiles
-CREATE POLICY "Users can read own profile" ON profiles
-  FOR SELECT USING (auth.uid() = id);
+DROP POLICY IF EXISTS "Users can read own profile" ON profiles;
+DROP POLICY IF EXISTS "Users can update own profile" ON profiles;
+DROP POLICY IF EXISTS "Authenticated users can view other profiles" ON profiles;
+DROP POLICY IF EXISTS "Authenticated users can view profiles" ON profiles;
 
 CREATE POLICY "Users can update own profile" ON profiles
-  FOR UPDATE USING (auth.uid() = id);
+  FOR UPDATE USING (auth.uid() = id) WITH CHECK (auth.uid() = id);
 
 -- Allow users to see other profiles (e.g., for friend discovery)
 -- This can be further restricted based on your app's logic
-CREATE POLICY "Authenticated users can view other profiles" ON profiles
+CREATE POLICY "Authenticated users can view profiles" ON profiles
   FOR SELECT TO authenticated USING (true);
 
 -- Recreate other tables and policies as they were
@@ -163,7 +189,7 @@ CREATE POLICY "Users can update own projects"
   ON projects
   FOR UPDATE
   TO authenticated
-  USING (creator_id = auth.uid());
+  USING (creator_id = auth.uid() OR auth.uid() = ANY(team_members));
 
 CREATE POLICY "Users can delete own projects"
   ON projects
@@ -213,6 +239,12 @@ CREATE POLICY "Users can update friendships they're part of"
   TO authenticated
   USING (requester_id = auth.uid() OR addressee_id = auth.uid());
 
+CREATE POLICY "Users can delete friendships"
+  ON friendships
+  FOR DELETE
+  TO authenticated
+  USING (requester_id = auth.uid() OR addressee_id = auth.uid());
+
 CREATE POLICY "Users can read their messages"
   ON messages
   FOR SELECT
@@ -231,6 +263,12 @@ CREATE POLICY "Users can update messages they received"
   TO authenticated
   USING (receiver_id = auth.uid());
 
+CREATE POLICY "Users can delete their own messages"
+  ON messages
+  FOR DELETE
+  TO authenticated
+  USING (sender_id = auth.uid());
+
 CREATE POLICY "Users can read own notifications"
   ON notifications
   FOR SELECT
@@ -240,6 +278,12 @@ CREATE POLICY "Users can read own notifications"
 CREATE POLICY "Users can update own notifications"
   ON notifications
   FOR UPDATE
+  TO authenticated
+  USING (user_id = auth.uid());
+
+CREATE POLICY "Users can delete own notifications"
+  ON notifications
+  FOR DELETE
   TO authenticated
   USING (user_id = auth.uid());
 

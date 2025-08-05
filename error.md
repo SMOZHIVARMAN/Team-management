@@ -1,109 +1,138 @@
-Uncaught Error: useNavigate() may be used only in the context of a <Router> component.
-    at invariant (react-router-dom.js?v=062e5259:209:11)
-    at useNavigateUnstable (react-router-dom.js?v=062e5259:3858:34)
-    at useNavigate (react-router-dom.js?v=062e5259:3855:46)
-    at AuthProvider (AuthContext.tsx:33:20)
-    at renderWithHooks (chunk-6VWAHX6D.js?v=b2e91926:11548:26)
-    at mountIndeterminateComponent (chunk-6VWAHX6D.js?v=b2e91926:14926:21)
-    at beginWork (chunk-6VWAHX6D.js?v=b2e91926:15914:22)
-    at HTMLUnknownElement.callCallback2 (chunk-6VWAHX6D.js?v=b2e91926:3674:22)
-    at Object.invokeGuardedCallbackDev (chunk-6VWAHX6D.js?v=b2e91926:3699:24)
-    at invokeGuardedCallback (chunk-6VWAHX6D.js?v=b2e91926:3733:39)
-invariant @ react-router-dom.js?v=062e5259:209
-useNavigateUnstable @ react-router-dom.js?v=062e5259:3858
-useNavigate @ react-router-dom.js?v=062e5259:3855
-AuthProvider @ AuthContext.tsx:33
-renderWithHooks @ chunk-6VWAHX6D.js?v=b2e91926:11548
-mountIndeterminateComponent @ chunk-6VWAHX6D.js?v=b2e91926:14926
-beginWork @ chunk-6VWAHX6D.js?v=b2e91926:15914
-callCallback2 @ chunk-6VWAHX6D.js?v=b2e91926:3674
-invokeGuardedCallbackDev @ chunk-6VWAHX6D.js?v=b2e91926:3699
-invokeGuardedCallback @ chunk-6VWAHX6D.js?v=b2e91926:3733
-beginWork$1 @ chunk-6VWAHX6D.js?v=b2e91926:19765
-performUnitOfWork @ chunk-6VWAHX6D.js?v=b2e91926:19198
-workLoopSync @ chunk-6VWAHX6D.js?v=b2e91926:19137
-renderRootSync @ chunk-6VWAHX6D.js?v=b2e91926:19116
-performConcurrentWorkOnRoot @ chunk-6VWAHX6D.js?v=b2e91926:18678
-workLoop @ chunk-6VWAHX6D.js?v=b2e91926:197
-flushWork @ chunk-6VWAHX6D.js?v=b2e91926:176
-performWorkUntilDeadline @ chunk-6VWAHX6D.js?v=b2e91926:384Understand this error
-react-router-dom.js?v=062e5259:209 Uncaught Error: useNavigate() may be used only in the context of a <Router> component.
-    at invariant (react-router-dom.js?v=062e5259:209:11)
-    at useNavigateUnstable (react-router-dom.js?v=062e5259:3858:34)
-    at useNavigate (react-router-dom.js?v=062e5259:3855:46)
-    at AuthProvider (AuthContext.tsx:33:20)
-    at renderWithHooks (chunk-6VWAHX6D.js?v=b2e91926:11548:26)
-    at mountIndeterminateComponent (chunk-6VWAHX6D.js?v=b2e91926:14926:21)
-    at beginWork (chunk-6VWAHX6D.js?v=b2e91926:15914:22)
-    at HTMLUnknownElement.callCallback2 (chunk-6VWAHX6D.js?v=b2e91926:3674:22)
-    at Object.invokeGuardedCallbackDev (chunk-6VWAHX6D.js?v=b2e91926:3699:24)
-    at invokeGuardedCallback (chunk-6VWAHX6D.js?v=b2e91926:3733:39)
-invariant @ react-router-dom.js?v=062e5259:209
-useNavigateUnstable @ react-router-dom.js?v=062e5259:3858
-useNavigate @ react-router-dom.js?v=062e5259:3855
-AuthProvider @ AuthContext.tsx:33
-renderWithHooks @ chunk-6VWAHX6D.js?v=b2e91926:11548
-mountIndeterminateComponent @ chunk-6VWAHX6D.js?v=b2e91926:14926
-beginWork @ chunk-6VWAHX6D.js?v=b2e91926:15914
-callCallback2 @ chunk-6VWAHX6D.js?v=b2e91926:3674
-invokeGuardedCallbackDev @ chunk-6VWAHX6D.js?v=b2e91926:3699
-invokeGuardedCallback @ chunk-6VWAHX6D.js?v=b2e91926:3733
-beginWork$1 @ chunk-6VWAHX6D.js?v=b2e91926:19765
-performUnitOfWork @ chunk-6VWAHX6D.js?v=b2e91926:19198
-workLoopSync @ chunk-6VWAHX6D.js?v=b2e91926:19137
-renderRootSync @ chunk-6VWAHX6D.js?v=b2e91926:19116
-recoverFromConcurrentError @ chunk-6VWAHX6D.js?v=b2e91926:18736
-performConcurrentWorkOnRoot @ chunk-6VWAHX6D.js?v=b2e91926:18684
-workLoop @ chunk-6VWAHX6D.js?v=b2e91926:197
-flushWork @ chunk-6VWAHX6D.js?v=b2e91926:176
-performWorkUntilDeadline @ chunk-6VWAHX6D.js?v=b2e91926:384Understand this error
-hook.js:608 The above error occurred in the <AuthProvider> component:
-
-    at AuthProvider (http://localhost:5173/src/contexts/AuthContext.tsx?t=1754295959343:32:32)
-    at App
-
-Consider adding an error boundary to your tree to customize error handling behavior.
-Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+fetch.ts:15  GET https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=*&id=eq.eb02c578-9e9d-4085-bd6d-f44f96e7c57e 406 (Not Acceptable)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+AuthContext.tsx:91 Profile not found, creating one...
 overrideMethod @ hook.js:608
-logCapturedError @ chunk-6VWAHX6D.js?v=b2e91926:14032
-update.callback @ chunk-6VWAHX6D.js?v=b2e91926:14052
-callCallback @ chunk-6VWAHX6D.js?v=b2e91926:11248
-commitUpdateQueue @ chunk-6VWAHX6D.js?v=b2e91926:11265
-commitLayoutEffectOnFiber @ chunk-6VWAHX6D.js?v=b2e91926:17093
-commitLayoutMountEffects_complete @ chunk-6VWAHX6D.js?v=b2e91926:17980
-commitLayoutEffects_begin @ chunk-6VWAHX6D.js?v=b2e91926:17969
-commitLayoutEffects @ chunk-6VWAHX6D.js?v=b2e91926:17920
-commitRootImpl @ chunk-6VWAHX6D.js?v=b2e91926:19353
-commitRoot @ chunk-6VWAHX6D.js?v=b2e91926:19277
-finishConcurrentRender @ chunk-6VWAHX6D.js?v=b2e91926:18760
-performConcurrentWorkOnRoot @ chunk-6VWAHX6D.js?v=b2e91926:18718
-workLoop @ chunk-6VWAHX6D.js?v=b2e91926:197
-flushWork @ chunk-6VWAHX6D.js?v=b2e91926:176
-performWorkUntilDeadline @ chunk-6VWAHX6D.js?v=b2e91926:384Understand this error
-chunk-6VWAHX6D.js?v=b2e91926:19413 Uncaught Error: useNavigate() may be used only in the context of a <Router> component.
-    at invariant (react-router-dom.js?v=062e5259:209:11)
-    at useNavigateUnstable (react-router-dom.js?v=062e5259:3858:34)
-    at useNavigate (react-router-dom.js?v=062e5259:3855:46)
-    at AuthProvider (AuthContext.tsx:33:20)
-    at renderWithHooks (chunk-6VWAHX6D.js?v=b2e91926:11548:26)
-    at mountIndeterminateComponent (chunk-6VWAHX6D.js?v=b2e91926:14926:21)
-    at beginWork (chunk-6VWAHX6D.js?v=b2e91926:15914:22)
-    at beginWork$1 (chunk-6VWAHX6D.js?v=b2e91926:19753:22)
-    at performUnitOfWork (chunk-6VWAHX6D.js?v=b2e91926:19198:20)
-    at workLoopSync (chunk-6VWAHX6D.js?v=b2e91926:19137:13)
-invariant @ react-router-dom.js?v=062e5259:209
-useNavigateUnstable @ react-router-dom.js?v=062e5259:3858
-useNavigate @ react-router-dom.js?v=062e5259:3855
-AuthProvider @ AuthContext.tsx:33
-renderWithHooks @ chunk-6VWAHX6D.js?v=b2e91926:11548
-mountIndeterminateComponent @ chunk-6VWAHX6D.js?v=b2e91926:14926
-beginWork @ chunk-6VWAHX6D.js?v=b2e91926:15914
-beginWork$1 @ chunk-6VWAHX6D.js?v=b2e91926:19753
-performUnitOfWork @ chunk-6VWAHX6D.js?v=b2e91926:19198
-workLoopSync @ chunk-6VWAHX6D.js?v=b2e91926:19137
-renderRootSync @ chunk-6VWAHX6D.js?v=b2e91926:19116
-recoverFromConcurrentError @ chunk-6VWAHX6D.js?v=b2e91926:18736
-performConcurrentWorkOnRoot @ chunk-6VWAHX6D.js?v=b2e91926:18684
-workLoop @ chunk-6VWAHX6D.js?v=b2e91926:197
-flushWork @ chunk-6VWAHX6D.js?v=b2e91926:176
-performWorkUntilDeadline @ chunk-6VWAHX6D.js?v=b2e91926:384Understand this error1
+fetchUserProfile @ AuthContext.tsx:91
+await in fetchUserProfile
+(anonymous) @ AuthContext.tsx:43
+(anonymous) @ GoTrueClient.ts:2370
+_notifyAllSubscribers @ GoTrueClient.ts:2368
+_recoverAndRefresh @ GoTrueClient.ts:2290
+await in _recoverAndRefresh
+_initialize @ GoTrueClient.ts:425
+await in _initialize
+(anonymous) @ GoTrueClient.ts:350
+(anonymous) @ GoTrueClient.ts:1248
+(anonymous) @ locks.ts:107Understand this warning
+fetch.ts:15  GET https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=*&id=eq.eb02c578-9e9d-4085-bd6d-f44f96e7c57e 406 (Not Acceptable)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+AuthContext.tsx:91 Profile not found, creating one...
+overrideMethod @ hook.js:608
+fetchUserProfile @ AuthContext.tsx:91
+await in fetchUserProfile
+(anonymous) @ AuthContext.tsx:48
+(anonymous) @ GoTrueClient.ts:1939
+_useSession @ GoTrueClient.ts:1318
+await in _useSession
+_emitInitialSession @ GoTrueClient.ts:1931
+(anonymous) @ GoTrueClient.ts:1923
+(anonymous) @ GoTrueClient.ts:1248
+(anonymous) @ locks.ts:107Understand this warning
+fetch.ts:15  POST https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=* 400 (Bad Request)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+AuthContext.tsx:70 Error creating profile: {code: '23502', details: null, hint: null, message: 'null value in column "email" of relation "profiles" violates not-null constraint'}
+overrideMethod @ hook.js:608
+createProfile @ AuthContext.tsx:70
+await in createProfile
+fetchUserProfile @ AuthContext.tsx:92
+await in fetchUserProfile
+(anonymous) @ AuthContext.tsx:43
+(anonymous) @ GoTrueClient.ts:2370
+_notifyAllSubscribers @ GoTrueClient.ts:2368
+_recoverAndRefresh @ GoTrueClient.ts:2290
+await in _recoverAndRefresh
+_initialize @ GoTrueClient.ts:425
+await in _initialize
+(anonymous) @ GoTrueClient.ts:350
+(anonymous) @ GoTrueClient.ts:1248
+(anonymous) @ locks.ts:107Understand this error
+fetch.ts:15  POST https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=* 400 (Bad Request)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+AuthContext.tsx:70 Error creating profile: {code: '23502', details: null, hint: null, message: 'null value in column "email" of relation "profiles" violates not-null constraint'}
+overrideMethod @ hook.js:608
+createProfile @ AuthContext.tsx:70
+await in createProfile
+fetchUserProfile @ AuthContext.tsx:92
+await in fetchUserProfile
+(anonymous) @ AuthContext.tsx:48
+(anonymous) @ GoTrueClient.ts:1939
+_useSession @ GoTrueClient.ts:1318
+await in _useSession
+_emitInitialSession @ GoTrueClient.ts:1931
+(anonymous) @ GoTrueClient.ts:1923
+(anonymous) @ GoTrueClient.ts:1248
+(anonymous) @ locks.ts:107Understand this error
+fetch.ts:15  GET https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=*&id=eq.eb02c578-9e9d-4085-bd6d-f44f96e7c57e 406 (Not Acceptable)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+Profile.tsx:62 Error fetching profile: {code: 'PGRST116', details: 'The result contains 0 rows', hint: null, message: 'JSON object requested, multiple (or no) rows returned'}
+overrideMethod @ hook.js:608
+fetchProfile @ Profile.tsx:62
+await in fetchProfile
+(anonymous) @ Profile.tsx:38
+commitHookEffectListMount @ react-dom.development.js:23189
+commitPassiveMountOnFiber @ react-dom.development.js:24965
+commitPassiveMountEffects_complete @ react-dom.development.js:24930
+commitPassiveMountEffects_begin @ react-dom.development.js:24917
+commitPassiveMountEffects @ react-dom.development.js:24905
+flushPassiveEffectsImpl @ react-dom.development.js:27078
+flushPassiveEffects @ react-dom.development.js:27023
+performSyncWorkOnRoot @ react-dom.development.js:26115
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26998
+commitRoot @ react-dom.development.js:26721
+finishConcurrentRender @ react-dom.development.js:26020
+performConcurrentWorkOnRoot @ react-dom.development.js:25848
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533Understand this error
+fetch.ts:15  GET https://ovakczhzsjpmctiomzra.supabase.co/rest/v1/profiles?select=*&id=eq.eb02c578-9e9d-4085-bd6d-f44f96e7c57e 406 (Not Acceptable)
+(anonymous) @ fetch.ts:15
+(anonymous) @ fetch.ts:46
+fulfilled @ fetch.ts:2
+Promise.then
+step @ fetch.ts:2
+(anonymous) @ fetch.ts:2
+__awaiter6 @ fetch.ts:2
+(anonymous) @ fetch.ts:34
+then @ PostgrestBuilder.ts:101Understand this error
+Profile.tsx:62 Error fetching profile: {code: 'PGRST116', details: 'The result contains 0 rows', hint: null, message: 'JSON object requested, multiple (or no) rows returned'}
